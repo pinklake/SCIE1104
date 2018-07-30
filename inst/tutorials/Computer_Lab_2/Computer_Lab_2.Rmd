@@ -1,0 +1,166 @@
+---
+title: "SCIE1104: COMPUTER LAB 2"
+output: learnr::tutorial
+progressive: true
+allow_skip: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Histograms: Exercise
+
+### Exercise 1. Create a histogram
+
+Although it is straight forward to create a bar chart or pie chart in Excel, it is much harder to create a histogram or boxplot in Excel.
+
+Histograms and Boxplots are key plots in science. This is one reasons for introducing to R Studio.
+
+Typing data directly into R can be time consuming.  Data can be read in from many different file formats (e.g. an Excel .csv extension file). For this exercise we have the R dataset already available within the SCIE1104 package that we have loaded. 
+
+```{r , echo=TRUE, eval=TRUE}
+data("wingspanMALES",package="SCIE1104")
+WingSpan <-wingspanMALES
+```
+
+The file contains measurements on the wing span of different birds. All the birds are Male. In R Studio summary details of the data set will appear in the data window.
+
+We now have an 'object' called WingSpan that we can work with.
+
+To look at the structure of the data we have read into R we can use the ``str()`` function.
+```{r , echo=TRUE, eval=TRUE}
+str(WingSpan)
+```
+If you look at the information in the console window you will see that we have a 'dataframe'; 
+ there are 87 observations; and the values are numbers. 
+
+We can look at the first few observations in the data using
+```{r , echo=TRUE, eval=TRUE}
+head(WingSpan)  # head() shows the first six observations
+                # and the column heading
+```
+
+If we type the dataframe name we will see all the observations
+```{r , echo=TRUE, eval=TRUE}
+WingSpan
+```
+
+When we have a sample set of observations such as we have here we want some way to look at the distribution of the data.
+
+At the moment we have a dataframe called WingSpan and a column of data within the dataframe called 'males'.
+
+Our instructions need to tell R:
+
+i. which data.frame to grab -- we want the ``WingSpan`` dataframe;  
+ii. the data column within the dataframe to look at -- we want the 'males' column; and
+iii. the 'function' to apply  -- we want the histogram function which we call with ``hist()``.
+We get a basic histogram using the following commands:
+```{r , echo=TRUE, eval=TRUE}
+with(WingSpan, hist(males))
+```
+We can then set the x-axis range with the ``xlim()`` option
+
+```{r, xlimhist, exercise=TRUE, exercise.echo = TRUE, exercise.eval=TRUE,exercise.lines = 10}
+with(WingSpan, hist(males,  xlim = c(0,100)))
+```
+
+We can start to make edits to the plot:
+
+If you feel lost, please consult the R guide for histograms. The guide provides lots of information. Look at each line of code to make sure you understand what is going on.
+
+```{r, hist-options,  exercise=TRUE, exercise.eval=TRUE}
+with(WingSpan, hist(males,  xlim = c(0,100),  
+                    col = "lightgreen", border = "magenta",
+                    main ="Male wingspan histogram", 
+                    xlab = "Wingspan (cm)", 
+                    ylab ="Frequency of observation"))
+```
+
+### \t
+
+## Histograms: Reinforcement activity
+
+Change the example below as follows:
+\begin{itemize}
+\item change the fill colour to grey 
+\item change the border colour to black
+\item change the x-axis back to the default setting
+\end{itemize}
+
+```{r histogram3, exercise=TRUE, exercise.lines = 10}
+with(WingSpan, hist(males,  xlim = c(0,100),  
+                    col = "lightgreen", border = "magenta",
+                    main ="Male wingspan histogram", 
+                    xlab = "Wingspan (cm)", 
+                    ylab ="Frequency of observation"))
+```
+
+
+##  Getting images from R to word documents
+
+Use the export tab, and the copy to clipboard option to experiment with changing your plot size.
+
+Finally, see if you can copy and paste the histogram to a word document.
+
+It is important that you can get the histogram from R into a word document, so please ask for help if you are struggling with this.
+
+You also need to have the figure formatted in the SCIE1104 style guide format for figures. see the handout on the LMS for this.  It is the format you will need for assignments.
+
+
+           Technical note on the default axis format for histograms.           
+
+It is possible to override the default axis setting for histograms as shown below.
+
+```{r histogram4, exercise=TRUE, exercise.lines = 10}
+with(WingSpan, hist(males,  xaxs="i", yaxs="i"))
+
+```
+Sometimes this can be misleading.  For example, in this case the first bin is at 40, not zero, and so it is possible to think the distribution is closer to zero than it really is. For SCIE1104, to save confusion, we will always use the default setting.
+------End of technical note on the default axis format for histograms.         
+
+```{r, echo=FALSE}
+sliderInput("bins", "Number of bins:", min = 1, max = 50, value = 30)
+plotOutput("distPlot")
+```
+
+```{r, context="server"}
+output$distPlot <- renderPlot({
+  x <- WingSpan$males  
+  bins <- seq(min(x), max(x), length.out = input$bins + 1)
+  hist(x, breaks = bins, col = 'darkgray', border = 'white')
+})
+```
+### \t
+
+## Histograms: Additional activity
+
+If you have time create a basic histogram of the female wing spans.
+
+The dataset is included in the package and can be read in as follows:
+
+```{r readcsvfemale, exercise=TRUE, exercise.lines = 15}
+data("wingspanFEMALES",package="SCIE1104")
+WingSpanF <-wingspanFEMALES
+#  and to check what values you have something like:
+
+summary(WingSpanF)
+```
+
+Now, adapt the male wingspan example script to create a histogram for female wingspans.
+
+```{r, echo=TRUE, eval=FALSE}
+########################################################################
+#                                                                      #
+#  ... you have made it through quite a bit of stuff, well done        #
+#                                                                      #
+#                                                                      #
+#  (\   .-.   .-.   /_")      (\   .-.   .-.   /_")                    #
+#   \\_//^\\_//^\\_//          \\_//^\\_//^\\_//                       #
+#    `"`   `"`   `"`            `"`   `"`   `"`                        #
+#                                .... we'll pick up here next week :)  #                        
+#                                                                      #
+########################################################################
+```
