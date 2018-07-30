@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+<meta name="progressive" content="false" />
+<meta name="allow-skip" content="false" />
+
+<title>SCIE1104: COMPUTER LAB 3</title>
+
+
+<!-- highlightjs -->
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs && document.readyState && document.readyState === "complete") {
+   window.setTimeout(function() {
+      hljs.initHighlighting();
+   }, 0);
+}
+</script>
+
+
+
+</head>
+
+<body>
+
+
+
+<div class="pageContent band">
+<div class="bandContent page">
+
+<div class="topics">
+
+<div id="section-histograms-revision" class="section level2">
+<h2>Histograms: Revision</h2>
+<div id="section-data-examination" class="section level3">
+<h3>Data examination</h3>
+<p>We start today where we finished last week</p>
+<p>To look at the structure of the data we have read into R you can use the <code>str</code> command</p>
+<pre class="r"><code>library(SCIE1104)
+data(&quot;wingspanMALES&quot;)
+str(wingspanMALES)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    87 obs. of  2 variables:
+##  $ X    : int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ males: num  54.8 63.1 63.4 68.9 62.1 ...</code></pre>
+<p>Modify the following code to limit the number of rows printed to 5:</p>
+<div class="tutorial-exercise" data-label="wing-str" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>wingspanMALES</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["X"],"name":[1],"type":["int"],"align":["right"]},{"label":["males"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"54.75"},{"1":"2","2":"63.14"},{"1":"3","2":"63.44"},{"1":"4","2":"68.92"},{"1":"5","2":"62.15"},{"1":"6","2":"63.22"},{"1":"7","2":"66.21"},{"1":"8","2":"63.67"},{"1":"9","2":"60.82"},{"1":"10","2":"64.75"},{"1":"11","2":"69.19"},{"1":"12","2":"70.00"},{"1":"13","2":"60.32"},{"1":"14","2":"60.14"},{"1":"15","2":"57.47"},{"1":"16","2":"58.70"},{"1":"17","2":"66.30"},{"1":"18","2":"64.98"},{"1":"19","2":"61.71"},{"1":"20","2":"64.31"},{"1":"21","2":"57.90"},{"1":"22","2":"59.80"},{"1":"23","2":"67.53"},{"1":"24","2":"62.10"},{"1":"25","2":"76.23"},{"1":"26","2":"61.51"},{"1":"27","2":"70.19"},{"1":"28","2":"62.57"},{"1":"29","2":"56.42"},{"1":"30","2":"69.38"},{"1":"31","2":"60.48"},{"1":"32","2":"64.23"},{"1":"33","2":"62.56"},{"1":"34","2":"67.53"},{"1":"35","2":"47.57"},{"1":"36","2":"62.04"},{"1":"37","2":"53.99"},{"1":"38","2":"83.68"},{"1":"39","2":"60.24"},{"1":"40","2":"84.98"},{"1":"41","2":"65.08"},{"1":"42","2":"49.99"},{"1":"43","2":"92.36"},{"1":"44","2":"52.94"},{"1":"45","2":"84.80"},{"1":"46","2":"47.29"},{"1":"47","2":"64.56"},{"1":"48","2":"57.33"},{"1":"49","2":"58.30"},{"1":"50","2":"60.77"},{"1":"51","2":"74.50"},{"1":"52","2":"91.81"},{"1":"53","2":"56.27"},{"1":"54","2":"75.08"},{"1":"55","2":"58.17"},{"1":"56","2":"59.83"},{"1":"57","2":"57.22"},{"1":"58","2":"51.85"},{"1":"59","2":"72.71"},{"1":"60","2":"61.69"},{"1":"61","2":"73.58"},{"1":"62","2":"53.75"},{"1":"63","2":"64.14"},{"1":"64","2":"41.46"},{"1":"65","2":"50.50"},{"1":"66","2":"56.85"},{"1":"67","2":"67.36"},{"1":"68","2":"73.46"},{"1":"69","2":"63.17"},{"1":"70","2":"57.08"},{"1":"71","2":"52.21"},{"1":"72","2":"62.70"},{"1":"73","2":"71.53"},{"1":"74","2":"83.12"},{"1":"75","2":"49.81"},{"1":"76","2":"90.03"},{"1":"77","2":"61.00"},{"1":"78","2":"49.17"},{"1":"79","2":"55.64"},{"1":"80","2":"77.08"},{"1":"81","2":"50.00"},{"1":"82","2":"52.32"},{"1":"83","2":"65.20"},{"1":"84","2":"73.17"},{"1":"85","2":"63.62"},{"1":"86","2":"53.75"},{"1":"87","2":"56.30"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["X"],"name":[1],"type":["int"],"align":["right"]},{"label":["males"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"54.75","_rn_":"1"},{"1":"2","2":"63.14","_rn_":"2"},{"1":"3","2":"63.44","_rn_":"3"},{"1":"4","2":"68.92","_rn_":"4"},{"1":"5","2":"62.15","_rn_":"5"},{"1":"6","2":"63.22","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>To get a brief summary of the key data attributes, use the <code>summary</code> function.</p>
+<pre class="r"><code>summary(wingspanMALES) </code></pre>
+<pre><code>##        X            males      
+##  Min.   : 1.0   Min.   :41.46  
+##  1st Qu.:22.5   1st Qu.:57.15  
+##  Median :44.0   Median :62.15  
+##  Mean   :44.0   Mean   :63.40  
+##  3rd Qu.:65.5   3rd Qu.:67.53  
+##  Max.   :87.0   Max.   :92.36</code></pre>
+</div>
+<div id="section-section" class="section level3">
+<h3></h3>
+</div>
+<div id="section-creating-a-histogram" class="section level3">
+<h3>Creating a histogram</h3>
+<p>Recall that the formula for a basic histogram was</p>
+<pre class="r"><code>with(wingspanMALES, hist(males))</code></pre>
+<p><img src="Computer_Lab_3_files/figure-html/unnamed-chunk-3-1.png" width="624" /></p>
+<p>We saw last week that we could make edits to the basic plot:</p>
+<pre class="r"><code>with(wingspanMALES, hist(males,
+                    breaks = &quot;Sturges&quot;,                # define the break points 
+                    xlim = c(0,100),                   # set the x-axis range
+                    ylim = c(0,35),                    # set the y-axis range
+                    col = &quot;lightgrey&quot;,                 # fill the columns
+                    border = &quot;magenta&quot;,                # column border     
+                    main =&quot;Male wingspan histogram&quot;,   # figure title
+                    xlab = &quot;Wingspan (cm)&quot;,            # x-axis label
+                    ylab =&quot;Frequency of observation&quot;,  # y-axis label
+                    cex.lab = 0.8,                     # controls size of labels
+                    cex.axis =1.2,                     # controls size of axis numbers
+                    cex.main =1.5))                    # controls size of title  </code></pre>
+<p><img src="Computer_Lab_3_files/figure-html/unnamed-chunk-4-1.png" width="624" /></p>
+<p>We will always be OK relying on one of the default histogram formulas for creating the histogram bin sizes when the data sample is smallish the three defaul options for breaks <em>Sturges</em>,<em>Scott</em> and <em>FD</em> will all give the same result.</p>
+<p>We can also create a sequence for the breaks where we specify i. a start value ii. an end value iii. a value for the gap between each values</p>
+<p>we create a sequence as follows:</p>
+<pre class="r"><code>seq(from = 2, to = 11, by =1.5)</code></pre>
+<pre><code>## [1]  2.0  3.5  5.0  6.5  8.0  9.5 11.0</code></pre>
+<p>Do the values printed in the console make sense to you?</p>
+<p>For the wingspan data a sensible sequence may be as follows:</p>
+<pre class="r"><code>seq(from = 25, to = 110, by =5)</code></pre>
+<pre><code>##  [1]  25  30  35  40  45  50  55  60  65  70  75  80  85  90  95 100 105
+## [18] 110</code></pre>
+<p>So, if we use the ‘seq’ function for the breaks, we are in effect adding a list of break points.</p>
+<p><img src="Computer_Lab_3_files/figure-html/unnamed-chunk-7-1.png" width="624" /></p>
+<p>If we think the sequence and x-axis are too long, then we can edit these to make them shorter</p>
+</div>
+<div id="section-section-1" class="section level3">
+<h3></h3>
+</div>
+</div>
+<div id="section-histograms-reinforcement-exercise" class="section level2">
+<h2>Histograms: Reinforcement exercise</h2>
+<p>Carry out the following edits to the code below:</p>
+<ol style="list-style-type: lower-roman">
+<li>edit the sequence so that it runs from 35 to 100 by 5</li>
+<li>change the y-axis label so that it reads “Bird count” rather than “Frequency of observation”</li>
+</ol>
+<div class="tutorial-exercise" data-label="wings-hist" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>with(wingspanMALES, hist(males,  
+                    breaks = seq(from = 25, to = 110, by =5),
+                    xlim = c(20,100),
+                    col = &quot;lightgrey&quot;, 
+                    border = &quot;black&quot;,
+                    main =&quot;Male wingspan histogram&quot;, 
+                    xlab = &quot;Wingspan (cm)&quot;, 
+                    ylab =&quot;Frequency of observation&quot;))</code></pre>
+<img src="Computer_Lab_3_files/figure-html/wings-hist-1.png" width="624" />
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<div id="section-section-2" class="section level3">
+<h3></h3>
+</div>
+</div>
+<div id="section-histograms-mine-data-exercise" class="section level2">
+<h2>Histograms: Mine data exercise</h2>
+<p>The mine sample data is the same data set that was used in the lectures</p>
+<p>Now examine the dataset ‘mine.sample’ in a similar way to the previous exercise, i.e. look at the way the data has been read in and the structure of the data set.</p>
+<div class="tutorial-exercise" data-label="coal-str" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="5">
+<pre class="text"><code>mine.sample</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["observation"],"name":[1],"type":["int"],"align":["right"]},{"label":["measurement"],"name":[2],"type":["dbl"],"align":["right"]}],"data":[{"1":"1","2":"42.44602"},{"1":"2","2":"24.54935"},{"1":"3","2":"32.06090"},{"1":"4","2":"43.40569"},{"1":"5","2":"61.58136"},{"1":"6","2":"19.29292"},{"1":"7","2":"36.97101"},{"1":"8","2":"64.27781"},{"1":"9","2":"33.63633"},{"1":"10","2":"49.33616"},{"1":"11","2":"56.32427"},{"1":"12","2":"50.34648"},{"1":"13","2":"61.04676"},{"1":"14","2":"41.41557"},{"1":"15","2":"35.80806"},{"1":"16","2":"11.74511"},{"1":"17","2":"42.03660"},{"1":"18","2":"54.60654"},{"1":"19","2":"57.55325"},{"1":"20","2":"33.36048"},{"1":"21","2":"107.20712"},{"1":"22","2":"50.81662"},{"1":"23","2":"46.90711"},{"1":"24","2":"83.19145"},{"1":"25","2":"30.74656"},{"1":"26","2":"35.15764"},{"1":"27","2":"146.01911"},{"1":"28","2":"44.28189"},{"1":"29","2":"99.66310"},{"1":"30","2":"21.45071"},{"1":"31","2":"40.03495"},{"1":"32","2":"53.20877"},{"1":"33","2":"51.16371"},{"1":"34","2":"26.63412"},{"1":"35","2":"44.46227"},{"1":"36","2":"25.69512"},{"1":"37","2":"62.88847"},{"1":"38","2":"75.74700"},{"1":"39","2":"14.47637"},{"1":"40","2":"81.68399"},{"1":"41","2":"23.67664"},{"1":"42","2":"55.27915"},{"1":"43","2":"61.24992"},{"1":"44","2":"39.84777"},{"1":"45","2":"31.89516"},{"1":"46","2":"47.83089"},{"1":"47","2":"54.84004"},{"1":"48","2":"68.48828"},{"1":"49","2":"15.78157"},{"1":"50","2":"19.43006"},{"1":"51","2":"90.03625"},{"1":"52","2":"74.31595"},{"1":"53","2":"54.74334"},{"1":"54","2":"62.96635"},{"1":"55","2":"69.65808"},{"1":"56","2":"11.64119"},{"1":"57","2":"76.71903"},{"1":"58","2":"34.55380"},{"1":"59","2":"49.41824"},{"1":"60","2":"37.99416"},{"1":"61","2":"68.10112"},{"1":"62","2":"36.99471"},{"1":"63","2":"57.06912"},{"1":"64","2":"36.22208"},{"1":"65","2":"25.49845"},{"1":"66","2":"80.64175"},{"1":"67","2":"63.78138"},{"1":"68","2":"104.28655"},{"1":"69","2":"45.49435"},{"1":"70","2":"77.28598"},{"1":"71","2":"118.24051"},{"1":"72","2":"38.25484"},{"1":"73","2":"22.72659"},{"1":"74","2":"39.06924"},{"1":"75","2":"39.56681"},{"1":"76","2":"47.50579"},{"1":"77","2":"103.66492"},{"1":"78","2":"37.41005"},{"1":"79","2":"53.06479"},{"1":"80","2":"39.29783"},{"1":"81","2":"44.48876"},{"1":"82","2":"51.52361"},{"1":"83","2":"85.55150"},{"1":"84","2":"46.79004"},{"1":"85","2":"62.89284"},{"1":"86","2":"65.00351"},{"1":"87","2":"69.57448"},{"1":"88","2":"33.04314"},{"1":"89","2":"99.33042"},{"1":"90","2":"36.39869"},{"1":"91","2":"41.76753"},{"1":"92","2":"88.85771"},{"1":"93","2":"84.10392"},{"1":"94","2":"25.53411"},{"1":"95","2":"28.45932"},{"1":"96","2":"22.33091"},{"1":"97","2":"48.22776"},{"1":"98","2":"47.81941"},{"1":"99","2":"52.82944"},{"1":"100","2":"58.03754"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<p>We obtain a basic histogram as follows</p>
+<pre class="r"><code>with(mine.sample, hist(measurement, breaks =&#39;sturges&#39;)) # this is the default</code></pre>
+<p><img src="Computer_Lab_3_files/figure-html/unnamed-chunk-8-1.png" width="624" /></p>
+<p>Now edit the basic histogram so that:</p>
+<ol style="list-style-type: lower-roman">
+<li>breaks is equal to ‘fd’ to give smaller bin widths</li>
+<li>the figure colour is lightgrey (ie the column fill colour is grey)</li>
+<li>the border for the columns is darkgrey</li>
+<li>the x-axis label reads “Depth to coal (m)”</li>
+<li>the y-axis label reads “Frequency of observation”</li>
+<li>the figure title is “Coal mine overburden example”</li>
+</ol>
+you just need to go back to the wingspan example to see what to do
+<div class="tutorial-exercise" data-label="coal-hist" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>with(mine.sample, hist(measurement, breaks =&#39;sturges&#39;)) # this is the default</code></pre>
+<img src="Computer_Lab_3_files/figure-html/coal-hist-1.png" width="624" />
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<p>… so that was our warm up exercise; we’re warm now!</p>
+<div id="section-section-3" class="section level3">
+<h3></h3>
+</div>
+</div>
+<div id="section-boxplots-introduction" class="section level2">
+<h2>Boxplots: Introduction</h2>
+<div id="section-exercise-2.-creating-a-box-plot" class="section level3">
+<h3>Exercise 2. Creating a box plot</h3>
+<p>The dataset ‘Birds’ contains information on the number of birds spotted on two different farms each day for 37 days.</p>
+<p>First, make sure you have the file saved in your working directory</p>
+<p>Next, we load the data which is saved within the current package and inspect the data:</p>
+<pre class="r"><code>data(Birds , package = &quot;SCIE1104&quot;)
+str(Birds)</code></pre>
+<pre><code>## &#39;data.frame&#39;:    37 obs. of  2 variables:
+##  $ Farm.A: int  17 19 16 20 22 17 26 25 17 13 ...
+##  $ Farm.B: int  77 84 78 69 79 79 78 88 77 73 ...</code></pre>
+<p>We have data on Farm A and Farm B, and there are 37 observations for each farm.</p>
+<pre class="r"><code>head(Birds)</code></pre>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":[""],"name":["_rn_"],"type":[""],"align":["left"]},{"label":["Farm.A"],"name":[1],"type":["int"],"align":["right"]},{"label":["Farm.B"],"name":[2],"type":["int"],"align":["right"]}],"data":[{"1":"17","2":"77","_rn_":"1"},{"1":"19","2":"84","_rn_":"2"},{"1":"16","2":"78","_rn_":"3"},{"1":"20","2":"69","_rn_":"4"},{"1":"22","2":"79","_rn_":"5"},{"1":"17","2":"79","_rn_":"6"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
+<p>IMPORTANT – note that there are two columns of data the data will not always be ordered this way.</p>
+<p>The 5-number summary for the data (plus the mean value) can be obtained using</p>
+<pre class="r"><code>summary(Birds)</code></pre>
+<pre><code>##      Farm.A          Farm.B     
+##  Min.   :13.00   Min.   :66.00  
+##  1st Qu.:17.00   1st Qu.:75.00  
+##  Median :20.00   Median :81.00  
+##  Mean   :20.03   Mean   :79.73  
+##  3rd Qu.:22.00   3rd Qu.:84.00  
+##  Max.   :26.00   Max.   :92.00</code></pre>
+<p>This information tells us that the average number of birds sighted on Farm B is greater than the average number of birds sighted on Farm A. Wewe can also see that the spread of observations at Farm B is much greater than observed at Farm A.</p>
+<p>The box-plot is a visual representation of the 5-number summary.</p>
+<p>The <em>box</em> plots the area of the interquartile range (2nd Qu. and 3rd Qu.). The solid line in the middle of the <em>box</em> shows the median. The lines to the outer edges of the plot show the max and min value.</p>
+<p>Note if an observation is far away from the other observations it will be identified as an outlier and will be displayed as a dot.</p>
+<p>We generate the default boxplot as:</p>
+<pre class="r"><code>boxplot(Birds)</code></pre>
+<p><img src="Computer_Lab_3_files/figure-html/unnamed-chunk-12-1.png" width="624" /></p>
+<p>If we don’t like the default labels we can change them as:</p>
+<pre class="r"><code>boxplot(Birds, names = c(&quot;Little Farm&quot;, &quot;Big Farm&quot;))</code></pre>
+<p><img src="Computer_Lab_3_files/figure-html/unnamed-chunk-13-1.png" width="624" /></p>
+<p>We can then add some other features to out boxplot</p>
+<pre class="r"><code>boxplot(Birds, names = c(&quot;Little Farm&quot;, &quot;Big Farm&quot;),  
+        col = &quot;grey&quot;, 
+        main =&quot;Bird sightings&quot;, 
+        xlab = &quot;Farms&quot;, 
+        ylab =&quot;No. bird sightings per day&quot;,
+        boxwex=0.8)</code></pre>
+<p><img src="Computer_Lab_3_files/figure-html/unnamed-chunk-14-1.png" width="624" /></p>
+</div>
+<div id="section-section-4" class="section level3">
+<h3></h3>
+</div>
+</div>
+<div id="section-boxplots-reinforcement-activity" class="section level2">
+<h2>Boxplots: Reinforcement activity</h2>
+<p>Edit the code below and:</p>
+<ol style="list-style-type: lower-roman">
+<li>Change the title to read “Bird sightings grape growing regions”</li>
+<li>Change the x label to read “Farms in Western Australia”</li>
+<li>With only two groups the box size can be a little too big we can change this with <code>boxwex</code>. the default value is 0.8 changing this value to 0.6 will help make the plot look better.</li>
+</ol>
+<div class="tutorial-exercise" data-label="birds_boxplot" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>boxplot(Birds, names = c(&quot;Little Farm&quot;, &quot;Big Farm&quot;),  
+        col = &quot;grey&quot;, 
+        main =&quot;Bird sightings&quot;, 
+        xlab = &quot;Farms&quot;, 
+        ylab =&quot;No. bird sightings per day&quot;,
+        boxwex=0.8)</code></pre>
+<img src="Computer_Lab_3_files/figure-html/birds_boxplot-1.png" width="624" />
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<div id="section-additional-features-you-can-control" class="section level3">
+<h3>Additional features you can control</h3>
+<p>You can change the font sizes for the</p>
+<ul>
+<li>title</li>
+<li>axis values, and</li>
+<li>axis labels</li>
+</ul>
+<p>using the <code>cex</code> option.</p>
+<p>Generally you will be OK to just rely on the defaults for your own plots, but to see how these options work run the below example and note what happens</p>
+<div class="tutorial-exercise" data-label="birds_boxplot2" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>boxplot(Birds,  names = c(&quot;Little Farm&quot;, &quot;Big Farm&quot;),
+        col = &quot;grey&quot;, 
+        main =&quot;Bird sightings grape growing regions&quot;, 
+        xlab = &quot;Farms in Western Australia&quot;, 
+        ylab =&quot;No. bird sightings per day&quot;,
+        boxwex = 0.6,
+        cex.main=2, 
+        cex.lab=1.5, 
+        cex.axis=0.5)</code></pre>
+<img src="Computer_Lab_3_files/figure-html/birds_boxplot2-1.png" width="624" />
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<p>We can make the plot horizontal using:</p>
+<div class="tutorial-exercise" data-label="birds_boxplot3" data-caption="Code" data-completion="1" data-diagnostics="1" data-startover="1" data-lines="0">
+<pre class="text"><code>boxplot(Birds, names = c(&quot;Little Farm&quot;, &quot;Big Farm&quot;), 
+        horizontal = TRUE,  
+        col  = &quot;grey&quot;, 
+        main = &quot;Bird sightings grape growing regions&quot;, 
+        xlab = &quot;Farms in Western Australia&quot;, 
+        ylab = &quot;No. bird sightings per day&quot;,
+        boxwex = 0.6)</code></pre>
+<img src="Computer_Lab_3_files/figure-html/birds_boxplot3-1.png" width="624" />
+<script type="application/json" data-opts-chunk="1">{"fig.width":6.5,"fig.height":4,"fig.retina":2,"fig.align":"default","fig.keep":"high","fig.show":"asis","out.width":624,"warning":true,"error":false,"message":true,"exercise.df_print":"paged","exercise.checker":"NULL"}</script>
+</div>
+<p>Look carefully at the plot. Are the axis labels in the right place? Now</p>
+<ol style="list-style-type: lower-roman">
+<li>edit the script so that the axis labels are in the right place</li>
+<li>use the copy to clipboard option to play around with the overall shape of the image, it will look better if the image is relatively long and not too tall. If you are unsure ask a tutor for help.</li>
+<li>Copy the image to a <strong>Word</strong> file, and format the caption such that it matches the SCIE1104 style format</li>
+</ol>
+<p>Note that figure quality will be a part of the assessment guide for Assignment 1!</p>
+<p>One of the most important things to get comfortable with is what to do when there are no tutors around to help. If you have time I recommend using the R help pages. For practice try consultingthe box plot help pages <code>help(boxplot)</code> and try and work out how to: add a ‘notch’ to each boxplot</p>
+</div>
+<div id="section-section-5" class="section level3">
+<h3></h3>
+</div>
+</div>
+<div id="section-boxplots-additional-exercise" class="section level2">
+<h2>Boxplots: Additional exercise</h2>
+<p>If you have time complete the following exercise</p>
+<p>Load the <code>Birds2</code> data file from the same package.</p>
+<p>The file <code>Birds2</code> contains information on the number of birds spotted on three different farms each day for 37 days.</p>
+<p>The default names for each column are: “Farm.A” “Farm.B” “Farm.C”</p>
+<p>Using the example script as an example:</p>
+<ol style="list-style-type: lower-alpha">
+<li>Change the names to: “Little Farm”, “Medium Farm”, “Big Farm”</li>
+<li>create a simple boxplot of the data</li>
+<li>create a boxplot of the data that includes
+<ul>
+<li>a title</li>
+<li>x and y axis labels</li>
+<li>thinner box widths for the box part of the plot</li>
+</ul></li>
+<li>copy the figure to a word document.</li>
+</ol>
+<pre class="r"><code>#####################################################################
+#                                                                   #
+#                                                                   #  
+#     (o&gt;   Like a bird on the wire                                 #
+#     //\      Like a drunk in a midnight choir                     #
+# ____V_/_____   I have tried in my way to be free...               #
+#     ||                                                            #
+#     ||                                         L. Cohen           #
+#                                                                   #
+#####################################################################</code></pre>
+
+<script type="application/shiny-prerendered" data-context="server-start">
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+learnr:::register_http_handlers(session, metadata = NULL)
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-wing-str-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-wing-str-code-editor`)), session)
+output$`tutorial-exercise-wing-str-output` <- renderUI({
+  `tutorial-exercise-wing-str-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-wings-hist-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-wings-hist-code-editor`)), session)
+output$`tutorial-exercise-wings-hist-output` <- renderUI({
+  `tutorial-exercise-wings-hist-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-coal-str-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-coal-str-code-editor`)), session)
+output$`tutorial-exercise-coal-str-output` <- renderUI({
+  `tutorial-exercise-coal-str-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-coal-hist-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-coal-hist-code-editor`)), session)
+output$`tutorial-exercise-coal-hist-output` <- renderUI({
+  `tutorial-exercise-coal-hist-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-birds_boxplot-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-birds_boxplot-code-editor`)), session)
+output$`tutorial-exercise-birds_boxplot-output` <- renderUI({
+  `tutorial-exercise-birds_boxplot-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-birds_boxplot2-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-birds_boxplot2-code-editor`)), session)
+output$`tutorial-exercise-birds_boxplot2-output` <- renderUI({
+  `tutorial-exercise-birds_boxplot2-result`()
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+`tutorial-exercise-birds_boxplot3-result` <- learnr:::setup_exercise_handler(reactive(req(input$`tutorial-exercise-birds_boxplot3-code-editor`)), session)
+output$`tutorial-exercise-birds_boxplot3-output` <- renderUI({
+  `tutorial-exercise-birds_boxplot3-result`()
+})
+</script>
+ <!--html_preserve-->
+<script type="application/shiny-prerendered" data-context="dependencies">
+{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootstrap"]},{"type":"character","attributes":{},"value":["3.3.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/bootstrap-3.3.5"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["viewport"]}},"value":[{"type":"character","attributes":{},"value":["width=device-width, initial-scale=1"]}]},{"type":"character","attributes":{},"value":["js/bootstrap.min.js","shim/html5shiv.min.js","shim/respond.min.js"]},{"type":"character","attributes":{},"value":["css/cerulean.min.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["pagedtable"]},{"type":"character","attributes":{},"value":["1.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/pagedtable-1.1"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["js/pagedtable.js"]},{"type":"character","attributes":{},"value":["css/pagedtable.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["highlightjs"]},{"type":"character","attributes":{},"value":["1.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["href"]}},"value":[{"type":"character","attributes":{},"value":["Computer_Lab_3_files/highlightjs-1.1"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["highlight.js"]},{"type":"character","attributes":{},"value":["textmate.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial"]},{"type":"character","attributes":{},"value":["0.9.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial.js"]},{"type":"character","attributes":{},"value":["tutorial.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-autocompletion"]},{"type":"character","attributes":{},"value":["0.9.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-autocompletion.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-diagnostics"]},{"type":"character","attributes":{},"value":["0.9.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-diagnostics.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-format"]},{"type":"character","attributes":{},"value":["0.9.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmarkdown/templates/tutorial/resources"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-format.js"]},{"type":"character","attributes":{},"value":["tutorial-format.css","rstudio-theme.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["1.11.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/jquery-1.11.3"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["font-awesome"]},{"type":"character","attributes":{},"value":["4.5.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["rmd/h/font-awesome-4.5.0"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["css/font-awesome.min.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rmarkdown"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bootbox"]},{"type":"character","attributes":{},"value":["4.4.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/bootbox"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["bootbox.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["localforage"]},{"type":"character","attributes":{},"value":["1.5"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/localforage"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["localforage.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial"]},{"type":"character","attributes":{},"value":["0.9.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial.js"]},{"type":"character","attributes":{},"value":["tutorial.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-autocompletion"]},{"type":"character","attributes":{},"value":["0.9.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-autocompletion.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["tutorial-diagnostics"]},{"type":"character","attributes":{},"value":["0.9.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/tutorial"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tutorial-diagnostics.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ace"]},{"type":"character","attributes":{},"value":["1.2.6"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/ace"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["ace.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["clipboardjs"]},{"type":"character","attributes":{},"value":["1.5.15"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/clipboardjs"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["clipboard.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["learnr"]},{"type":"logical","attributes":{},"value":[true]}]}]}
+</script>
+<!--/html_preserve-->
+</div>
+
+</div> <!-- topics -->
+
+<div class="topicsContainer">
+<div class="topicsPositioner">
+<div class="band">
+<div class="bandContent topicsListContainer">
+
+<!-- begin doc-metadata -->
+<div id="doc-metadata">
+<h2 class="title toc-ignore" style="display:none;">SCIE1104: COMPUTER LAB 3</h2>
+</div>
+<!-- end doc-metadata -->
+
+</div> <!-- bandContent.topicsListContainer -->
+</div> <!-- band -->
+</div> <!-- topicsPositioner -->
+</div> <!-- topicsContainer -->
+
+
+</div> <!-- bandContent page -->
+</div> <!-- pageContent band -->
+
+
+
+
+<script>
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+</script>
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+
+</html>

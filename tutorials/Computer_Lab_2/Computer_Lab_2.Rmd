@@ -1,93 +1,28 @@
 ---
-title: "COMPUTER LAB 2\n Semester Week 3"
-output:
-  learnr::tutorial:
-    progressive: true
-    allow_skip: true
+title: "SCIE1104: COMPUTER LAB 2"
+output: learnr::tutorial
+progressive: true
+allow_skip: true
 runtime: shiny_prerendered
 ---
 
 ```{r setup, include=FALSE}
+library(learnr)
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+## Histograms: Exercise
 
-## THE REDLINE INDEX AND R COMMANDS
-
-### 1.	Calculate the Red Line Index valueExercise 
-
-
-*The data file Bird Red Line Index contains information on the Status of 110 Bird Species.*
-
-The data file Bird Red Line Index contains information on the Status of 110 Bird Species.  
-Background
-The Redline Index is a measure that can be used to monitor the status of bird populations.  The formula for calculating the redline index can be understood as follows.  Birds are first classified into the following categories: Least Concern, Near Threatened, Vulnerable, Endangered, Critically Endangered, or Extinct.  The number of birds in each category is then multiplied by a weight to derive a score for each category.  These values are then added together.  The weights are: 0 for least concern, 1 for near threatened, 2 for vulnerable, 3 for endangered, 4 for critically endangered, 5 for extinct.  
-If there were 100 birds and they were all extinct, using the formula described above, the total score would come to: 
-$$\small (0 \times 0) + (1 \times 0) + (2 \times 0) + (3 \times 0) + (4 \times 0) + (5 \times 100) = 500.$$  
-If there were 100 birds and they were all in the Least Concern category the formula would give a score of 
-$$\small (0 \times 100) + (1 \times 0) + (2 \times 0) + (3 \times 0) + (4 \times 0) + (5 \times 0) = 0.$$
-If the Actual score obtained from the data is denoted A and the score when all birds are extinct is M, the formula for calculating the Red line Index can be written as (M-A)/M.  For example, if the data sample consisted of 60 birds species spread equally across each category the Red Line Index would be:
-$$\small
-\begin{eqnarray}
-A &=& (0 \times 10) \times (1 ? 10) \times (2 ? 10) \times (3 ? 10) \times (4 ? 10) \times (5 ? 10)\\ 
-&=& 150\\
-M &=& (5 \times 60)\\ 
-&=& 300\\
-(M-A)/M &=& (300-150)/300\\ 
-&=& 150/300\\
-&=& 0.5
-\end{eqnarray}
-$$
-
-What you need to do
-\begin{enumerate}
-\item Watch the Redline index (pivot table) recording and calculate the redline index for the data set using the pivot table method
-\item Put the Redline index information in a table that meets the SCIE1104 style guide format.
-\end{enumerate}
-
-
-### 2. Follow the below link and complete the first two chapters of the code school introduction to R 
-
-http://tryr.codeschool.com
-
-The relevant chapters are:
-\begin{enumerate{
-\item	R Syntax: A gentle introduction to R expressions, variables, and functions
-\item	Vectors: Grouping values into vectors, then doing arithmetic and graphs with them
-\end{enumerate}
-\textbf{Note:} each chapter is locked.  This means that to get to the next chapter you need to complete all the material in the previous chapter.  There is no need to sign up to 'code school', you can just complete the exercises during the lab.  If you want to complete the exercises in your own time in advance of your computer lab class the only way to establish a record that demonstrates you have completed the material (chapter badges) is to sign up for a free account.  Once you have a free account you should be able to start the exercises from where you finished your last session, so it should show the chapter badges you have collected.  However, for this week I strongly advise you to complete the exercises during the computer lab session. 
-
-Once you have finished the code school exercises make sure you get a tutor to check your work before moving on to the worked R script example.  If you have trouble with R please ask a tutor for help. 
-
-
-
-### 3. Start R studio and work through the Lab 2 Exercise 1 script on creating a histogram.  Remember to start by saving the relevant data file and script file somewhere.
-
-* If you have not done so already, watch the getting started recording before attempting to run the below script.*
-
-#### Exercise 1. Create a histogram
+### Exercise 1. Create a histogram
 
 Although it is straight forward to create a bar chart or pie chart in Excel, it is much harder to create a histogram or boxplot in Excel.
 
 Histograms and Boxplots are key plots in science. This is one reasons for introducing to R Studio.
 
-Typing data directly into R can be time consuming.  For this exercise we will read in the data from an Excel file.
+Typing data directly into R can be time consuming.  Data can be read in from many different file formats (e.g. an Excel .csv extension file). For this exercise we have the R dataset already available within the SCIE1104 package that we have loaded. 
 
-The specific format of the file we will use is an Excel .csv extension file. This approach will save us a lot of time.
-
-#  To do this you need to:
-
-```{r setwd, exercise=TRUE, exercise.lines = 5}
-#  SET THE WORKING DIRECTORY
-setwd("C:\\Users\\Alex Stuckey\\Documents\\Consult\\James Fogarty\\January 2018\\Online Tutorials")
-```
-If you don't know how to do this consult the recording on the LMS or ask a lab demonstrator.
-
-The below line only works if the file "wingspanMALES.csv" has been saved into your working directory.
-
-```{r readcsv , exercise=TRUE, exercise.lines = 5}
-#WingSpan <- read.csv("wingspanMALES.csv")
-data("wingspanMALES",package="SCIE4402")
+```{r , echo=TRUE, eval=TRUE}
+data("wingspanMALES",package="SCIE1104")
 WingSpan <-wingspanMALES
 ```
 
@@ -95,23 +30,21 @@ The file contains measurements on the wing span of different birds. All the bird
 
 We now have an 'object' called WingSpan that we can work with.
 
-To look at the structure of the data we have read into R 
-```{r structure, exercise=TRUE, exercise.lines = 1}
-#  you can use the 'str' command
+To look at the structure of the data we have read into R we can use the ``str()`` function.
+```{r , echo=TRUE, eval=TRUE}
 str(WingSpan)
 ```
 If you look at the information in the console window you will see that we have a 'dataframe'; 
  there are 87 observations; and the values are numbers. 
 
 We can look at the first few observations in the data using
-```{r head, exercise=TRUE, exercise.lines = 2}
+```{r , echo=TRUE, eval=TRUE}
 head(WingSpan)  # head() shows the first six observations
                 # and the column heading
 ```
 
 If we type the dataframe name we will see all the observations
-
-```{r showdataset, exercise=TRUE, exercise.lines = 10}
+```{r , echo=TRUE, eval=TRUE}
 WingSpan
 ```
 
@@ -120,16 +53,17 @@ When we have a sample set of observations such as we have here we want some way 
 At the moment we have a dataframe called WingSpan and a column of data within the dataframe called 'males'.
 
 Our instructions need to tell R:
-  (i)   which data.frame to grab -- we want the 'WingSpan' data.frame;  
-  (ii)  the data column within the data.frame to look at -- we want the 'males' column; and
-  (iii) the 'function' to apply  -- we want the histogram function which we call with 'hist'
+
+i. which data.frame to grab -- we want the ``WingSpan`` dataframe;  
+ii. the data column within the dataframe to look at -- we want the 'males' column; and
+iii. the 'function' to apply  -- we want the histogram function which we call with ``hist()``.
 We get a basic histogram using the following commands:
-```{r histogrammales, exercise=TRUE, exercise.lines = 10}
+```{r , echo=TRUE, eval=TRUE}
 with(WingSpan, hist(males))
 ```
-We can then set the x-axis range with the xlim() parameter
+We can then set the x-axis range with the ``xlim()`` option
 
-```{r xlimhist, exercise=TRUE, exercise.lines = 10}
+```{r, xlimhist, exercise=TRUE, exercise.echo = TRUE, exercise.eval=TRUE,exercise.lines = 10}
 with(WingSpan, hist(males,  xlim = c(0,100)))
 ```
 
@@ -137,7 +71,7 @@ We can start to make edits to the plot:
 
 If you feel lost, please consult the R guide for histograms. The guide provides lots of information. Look at each line of code to make sure you understand what is going on.
 
-```{r histogram2 , exercise=TRUE, exercise.lines = 10}
+```{r, hist-options,  exercise=TRUE, exercise.eval=TRUE}
 with(WingSpan, hist(males,  xlim = c(0,100),  
                     col = "lightgreen", border = "magenta",
                     main ="Male wingspan histogram", 
@@ -145,7 +79,9 @@ with(WingSpan, hist(males,  xlim = c(0,100),
                     ylab ="Frequency of observation"))
 ```
 
-## Reinforcement activity
+### \t
+
+## Histograms: Reinforcement activity
 
 Change the example below as follows:
 \begin{itemize}
@@ -197,18 +133,16 @@ output$distPlot <- renderPlot({
   hist(x, breaks = bins, col = 'darkgray', border = 'white')
 })
 ```
+### \t
 
-###  Complete the following activity if you have time
+## Histograms: Additional activity
 
-If you have time read in the 'wingspanFEMALES.csv' data file and create a basic histogram 
+If you have time create a basic histogram of the female wing spans.
 
-To read in the data, provided you have saved the file in your working directory you will need to use a command like:
-
+The dataset is included in the package and can be read in as follows:
 
 ```{r readcsvfemale, exercise=TRUE, exercise.lines = 15}
-
-#WingSpanF <- read.csv("wingspanFEMALES.csv")
-data("wingspanFEMALES",package="SCIE4402")
+data("wingspanFEMALES",package="SCIE1104")
 WingSpanF <-wingspanFEMALES
 #  and to check what values you have something like:
 

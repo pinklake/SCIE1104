@@ -1,0 +1,322 @@
+---
+title: "SCIE1104: COMPUTER LAB 3"
+output: learnr::tutorial
+progressive: true
+allow_skip: true
+runtime: shiny_prerendered
+---
+
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Histograms: Revision
+
+### Data examination
+
+We start today where we finished last week
+
+To look at the structure of the data we have read into R you can use the `str` command
+
+```{r, echo=TRUE}
+library(SCIE1104)
+data("wingspanMALES")
+str(wingspanMALES)
+```
+
+Modify the following code to limit the number of rows printed to 5:
+
+```{r, wing-str, exercise=TRUE, exercise.eval=TRUE}
+wingspanMALES
+```
+
+```{r print-limit-hint}
+head(wingspanMALES)
+```
+
+To get a brief summary of the key data attributes, use the `summary` function.
+
+```{r, echo=TRUE}
+summary(wingspanMALES) 
+```
+
+### \t
+
+### Creating a histogram
+
+Recall that the formula for a basic histogram was
+
+```{r, echo=TRUE}
+with(wingspanMALES, hist(males))
+```
+
+We saw last week that we could make edits to the basic plot:
+
+```{r, echo=TRUE}
+with(wingspanMALES, hist(males,
+                    breaks = "Sturges",                # define the break points 
+                    xlim = c(0,100),                   # set the x-axis range
+                    ylim = c(0,35),                    # set the y-axis range
+                    col = "lightgrey",                 # fill the columns
+                    border = "magenta",                # column border     
+                    main ="Male wingspan histogram",   # figure title
+                    xlab = "Wingspan (cm)",            # x-axis label
+                    ylab ="Frequency of observation",  # y-axis label
+                    cex.lab = 0.8,                     # controls size of labels
+                    cex.axis =1.2,                     # controls size of axis numbers
+                    cex.main =1.5))                    # controls size of title  
+```
+
+We will always be OK relying on one of the default histogram formulas for creating the histogram bin sizes when the data sample is smallish the three defaul options for breaks *Sturges*,*Scott* and *FD* will all give the same result.
+
+We can also create a sequence for the breaks where we specify
+i. a start value
+ii. an end value
+iii. a value for the gap between each values
+
+we create a sequence as follows:
+
+```{r, echo=TRUE}
+seq(from = 2, to = 11, by =1.5)
+```
+
+Do the values printed in the console make sense to you?
+
+For the wingspan data a sensible sequence may be as follows:
+```{r, echo=TRUE}
+seq(from = 25, to = 110, by =5)
+```
+
+So, if we use the 'seq' function for the breaks, we are in effect adding a list of break points.
+
+```{r}
+with(wingspanMALES, hist(males,  
+                    breaks = seq(from = 25, to = 110, by =5),
+                    xlim = c(20,100),
+                    col = "lightgrey", 
+                    border = "black",
+                    main ="Male wingspan histogram", 
+                    xlab = "Wingspan (cm)", 
+                    ylab ="Frequency of observation"))
+```
+
+If we think the sequence and x-axis are too long, then we can edit these to make them shorter
+
+### \t
+
+##  Histograms: Reinforcement exercise
+
+Carry out the following edits to the code below:
+
+i. edit the sequence so that it runs from 35 to 100 by 5
+ii. change the y-axis label so that it reads "Bird count" rather than "Frequency of observation"
+
+```{r, wings-hist,  exercise=TRUE, exercise.eval=TRUE}
+with(wingspanMALES, hist(males,  
+                    breaks = seq(from = 25, to = 110, by =5),
+                    xlim = c(20,100),
+                    col = "lightgrey", 
+                    border = "black",
+                    main ="Male wingspan histogram", 
+                    xlab = "Wingspan (cm)", 
+                    ylab ="Frequency of observation"))
+```
+
+###\t
+
+## Histograms: Mine data exercise
+
+The mine sample data is the same data set that was used in the lectures
+
+Now examine the dataset 'mine.sample' in a similar way to the previous exercise, i.e. look at the way the data has been read in and the structure of the data set.
+
+```{r, coal-str, exercise=TRUE, exercise.eval=TRUE,exercise.lines = 5}
+mine.sample
+```
+
+
+We obtain a basic histogram as follows 
+```{r, echo=TRUE}
+with(mine.sample, hist(measurement, breaks ='sturges')) # this is the default
+```
+
+Now edit the basic histogram so that:
+
+i. breaks is equal to 'fd' to give smaller bin widths
+ii. the figure colour is lightgrey (ie the column fill colour is grey)
+iii. the border for the columns is darkgrey
+iv. the x-axis label reads "Depth to coal (m)"
+v. the y-axis label reads "Frequency of observation"
+vi. the figure title is "Coal mine overburden example"
+
+you just need to go back to the wingspan example to see what to do
+```{r, coal-hist,exercise=TRUE, exercise.eval=TRUE}
+with(mine.sample, hist(measurement, breaks ='sturges')) # this is the default
+
+```
+... so that was our warm up exercise; we're warm now!
+
+### \t
+
+## Boxplots: Introduction
+
+### Exercise 2.  Creating a box plot
+
+The dataset 'Birds' contains information on the number of birds spotted on two different farms each day for 37 days.
+
+First, make sure you have the file saved in your working directory 
+
+Next, we load the data which is saved within the current package and inspect the data:
+
+```{r, echo=TRUE}
+data(Birds , package = "SCIE1104")
+str(Birds)
+```
+We have data on Farm A and Farm B, and there are 37 observations for each farm.
+
+```{r, echo=TRUE}
+head(Birds)
+```
+IMPORTANT -- note that there are two columns of data the data will not always be ordered this way.
+
+The 5-number summary for the data (plus the mean value) can be obtained using
+
+```{r, echo=TRUE}
+summary(Birds)
+```
+
+This information tells us that the average number of birds sighted on Farm B is greater than the average number of birds sighted on Farm A. Wewe can also see that the spread of observations at Farm B is much greater than observed at Farm A.
+
+The box-plot is a visual representation of the 5-number summary.
+
+The *box* plots the area of the interquartile range (2nd Qu. and 3rd Qu.). The solid line in the middle of the *box* shows the median. The lines to the outer edges of the plot show the max and min value.
+
+Note if an observation is far away from the other observations it will be identified as an outlier and will be displayed as a dot.  
+
+We generate the default boxplot as:
+
+```{r, echo=TRUE}
+boxplot(Birds)
+```
+
+If we don't like the default labels we can change them as:
+
+```{r, echo=TRUE}
+boxplot(Birds, names = c("Little Farm", "Big Farm"))
+```
+
+We can then add some other features to out boxplot
+
+```{r, echo=TRUE}
+boxplot(Birds, names = c("Little Farm", "Big Farm"),  
+        col = "grey", 
+        main ="Bird sightings", 
+        xlab = "Farms", 
+        ylab ="No. bird sightings per day",
+        boxwex=0.8)
+```
+
+### \t
+
+## Boxplots: Reinforcement activity  
+
+Edit the code below and:
+
+i. Change the title to read "Bird sightings grape growing regions"
+ii. Change the x label to read  "Farms in Western Australia"
+iii. With only two groups the box size can be a little too big we can change this with `boxwex`.  the default value is 0.8 changing this value to 0.6 will help make the plot look better.
+
+```{r, birds_boxplot,exercise=TRUE, exercise.eval=TRUE}
+boxplot(Birds, names = c("Little Farm", "Big Farm"),  
+        col = "grey", 
+        main ="Bird sightings", 
+        xlab = "Farms", 
+        ylab ="No. bird sightings per day",
+        boxwex=0.8)
+```
+
+###  Additional features you can control
+
+You can change the font sizes for the
+
+- title
+- axis values, and
+- axis labels
+
+using the `cex` option.
+
+Generally you will be OK to just rely on the defaults for your own plots, but to see how these options work run the below example and note what happens
+
+```{r, birds_boxplot2, exercise=TRUE, exercise.eval=TRUE}
+boxplot(Birds,  names = c("Little Farm", "Big Farm"),
+        col = "grey", 
+        main ="Bird sightings grape growing regions", 
+        xlab = "Farms in Western Australia", 
+        ylab ="No. bird sightings per day",
+        boxwex = 0.6,
+        cex.main=2, 
+        cex.lab=1.5, 
+        cex.axis=0.5)
+```
+
+We can make the plot horizontal using:
+
+```{r, birds_boxplot3, exercise=TRUE, exercise.eval=TRUE}
+boxplot(Birds, names = c("Little Farm", "Big Farm"), 
+        horizontal = TRUE,  
+        col  = "grey", 
+        main = "Bird sightings grape growing regions", 
+        xlab = "Farms in Western Australia", 
+        ylab = "No. bird sightings per day",
+        boxwex = 0.6)
+```
+
+Look carefully at the plot.  Are the axis labels in the right place?
+Now
+
+i. edit the script so that the axis labels are in the right place
+ii. use the copy to clipboard option to play around with the overall shape of the image, it will look better if the image is relatively long and not too tall. If you are unsure ask a tutor for help.
+iii. Copy the image to a **Word** file, and format the caption such that it matches the SCIE1104 style format
+
+Note that figure quality will be a part of the assessment guide for Assignment 1!
+
+One of the most important things to get comfortable with is what to do when there are no tutors around to help.
+If you have time I recommend using the R help pages. For practice try consultingthe box plot help pages ``help(boxplot)`` and try and work out how to:
+add a 'notch' to each boxplot
+
+### \t
+
+## Boxplots: Additional exercise
+
+If you have time complete the following exercise
+
+Load the ``Birds2`` data file from the same package.
+
+The file ``Birds2`` contains information on the number of birds spotted on three different farms each day for 37 days.
+
+The default names for each column are: "Farm.A" "Farm.B" "Farm.C" 
+
+Using the example script as an example:
+
+(a) Change the names to: "Little Farm", "Medium Farm", "Big Farm"
+(b) create a simple boxplot of the data
+(c) create a boxplot of the data that includes
+     - a title
+     - x and y axis labels
+     - thinner box widths for the box part of the plot
+(d) copy the figure to a word document.
+
+```{r, echo=TRUE, eval=FALSE}
+#####################################################################
+#                                                                   #
+#                                                                   #  
+#     (o>   Like a bird on the wire                                 #
+#     //\      Like a drunk in a midnight choir                     #
+# ____V_/_____   I have tried in my way to be free...               #
+#     ||                                                            #
+#     ||                                         L. Cohen           #
+#                                                                   #
+#####################################################################
+```
+
